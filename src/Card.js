@@ -13,11 +13,7 @@ const dateBuilder = (d) => {
   }
 
 
-  
-  
-
 function Card({weatherName, weatherCountry, weatherTemp, weatherType, weatherUrl, weatherAlt}) {    
-    const [weather, setWeather] = useState({})
 
     return (
         

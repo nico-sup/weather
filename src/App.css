@@ -79,11 +79,15 @@ form{
   position: relative;
 }
 
-
-.app{
-  background: red;
-}
-
-.app.warm{
-  background: blue;
+.clear{
+  height: 50px;
+  width: 200px;
+  padding-left: 10px;
+  background-color: whitesmoke;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  color: #286275;
+  margin: 15px;
+  display: none;
 }

@@ -17,14 +17,15 @@ function App() {
   const [weather, setWeather] = useState({})
   const [card, setCard] = useState([])
 
-
   useEffect(() => {
     db.collection("card").orderBy("timestamp", "desc").onSnapshot(snapshot =>(
       setCard(snapshot.docs.map(doc => (
         {
           id: doc.id,
           data: doc.data()
+         
         }
+        
       )))
     ))
   }, [])
@@ -32,7 +33,7 @@ function App() {
   const multipleCard = (e) => {
     e.preventDefault();
     document.getElementById('test').style.display="none"
-
+    document.querySelector('.clear').style.display="block"
     db.collection('card').add({
       weatherName: weather.name,
       weatherCountry: weather.weather && weather.sys.country,
@@ -44,6 +45,7 @@ function App() {
     })
     
   }
+  
 
   const search = evt =>{
     if(evt.key === 'Enter'){
@@ -59,21 +61,29 @@ function App() {
     }
   }
 
+  const clickTest = () =>{
+      {card.map(({id}) => ( 
+        db.collection('card').doc(id).delete()
+      ))}
+  
+  }
+
+  
   return (
     <div className="App">
       <div className="search__input">
-
           <form>
             <input type="text" className="input" placeholder="Enter a city name" onChange={e=> setQuery(e.target.value)} value={query} onKeyPress={search} />
             <button id="test" onClick={multipleCard}>submit</button>
           </form>
       </div>
+      <button className="clear" onClick={clickTest}>Clear all weather</button>
         <div className="box__card">
            <div className="slider">
                 <div className="test">
             {card.map(({id, data: {weatherName, weatherCountry, weatherTemp, weatherType, weatherUrl, weatherAlt} }) => (         
                   <Card
-                  key={id}
+                  key={console.log(id)}
                   weatherName = {weatherName}
                   weatherCountry = {weatherCountry}
                   weatherTemp = {weatherTemp}
